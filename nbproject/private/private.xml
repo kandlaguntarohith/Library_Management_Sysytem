@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/AllRegisteredUser.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/AddBookUnit.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/UserMenu.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/AddBook.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/AuthorizationScreen.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/AdminMenu.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/ReturnAbook.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/UserLogin.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/ServerChatWindow1.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/UserSignUp.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/LendBook.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/SearchABook.java</file>
-            <file>file:/C:/Users/rohit/Documents/NetBeansProjects/Library_Management_Sysytem/src/library_management_sysytem/AdminLogin.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -36,7 +36,8 @@ public class LibraryDatabase extends Library {
 
     }
 
-    public void insertUserIntoLibraryDatabase(String userName, String firstName, String lastName, String mailId, String password) {
+    public void insertUserIntoLibraryDatabase(String userName, String firstName, String lastName, String mailId,
+            String password) {
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?)");
             ps.setNull(1, Types.NULL);
@@ -56,7 +57,8 @@ public class LibraryDatabase extends Library {
     public User getUserCredentialsFromLibraryDatabase(String userName, String password) {
 
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM User WHERE userName = ? and password = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT * FROM User WHERE userName = ? and password = ?");
             ps.setString(1, userName);
             ps.setString(2, password);
             resultSet = ps.executeQuery();
@@ -65,7 +67,8 @@ public class LibraryDatabase extends Library {
                 return null;
             }
 
-            return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7));
+            return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4),
+                    resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -84,7 +87,8 @@ public class LibraryDatabase extends Library {
                 return null;
             }
 
-            return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7));
+            return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4),
+                    resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -95,7 +99,8 @@ public class LibraryDatabase extends Library {
     public Admin getAdminCredentialsFromLibraryDatabase(String adminName, String password) {
 
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM Admin WHERE adminName = ? and password = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT * FROM Admin WHERE adminName = ? and password = ?");
             ps.setString(1, adminName);
             ps.setString(2, password);
             resultSet = ps.executeQuery();
@@ -104,7 +109,8 @@ public class LibraryDatabase extends Library {
                 return null;
             }
 
-            return new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
+            return new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                    resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -119,7 +125,9 @@ public class LibraryDatabase extends Library {
 
             resultSet = ps.executeQuery();
             while (resultSet.next()) {
-                books.add(new Book(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4), getCalenderFromDateFormatString(resultSet.getString(5)), resultSet.getInt(6)));
+                books.add(new Book(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getInt(4), getCalenderFromDateFormatString(resultSet.getString(5)),
+                        resultSet.getInt(6)));
             }
             return books;
 
@@ -136,7 +144,8 @@ public class LibraryDatabase extends Library {
 
             resultSet = ps.executeQuery();
             while (resultSet.next()) {
-                users.add(new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7)));
+                users.add(new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getString(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7)));
             }
             return users;
 
@@ -146,7 +155,9 @@ public class LibraryDatabase extends Library {
         return null;
     }
 
-    public AllRegisteredUser fetchUsersList() {
+    public AllRegisteredUser
+
+            fetchUsersList() {
         AllRegisteredUser allregistereduser = new AllRegisteredUser();
         JTable allUserTable = allregistereduser.returntable();
         try {
@@ -322,7 +333,8 @@ public class LibraryDatabase extends Library {
 
     public JTable fetchBorrowedBooksListUser(JTable allBooksTable, User user) {
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT BookBorrowInfoid,BookBorrowInfo.bookId,bookName,issueCalendarDate,returnDeadlineDate FROM BookBorrowInfo,book WHERE userId = ? AND BookBorrowInfo.bookId = book.bookId");
+            PreparedStatement ps = connection.prepareStatement(
+                    "SELECT BookBorrowInfoid,BookBorrowInfo.bookId,bookName,issueCalendarDate,returnDeadlineDate FROM BookBorrowInfo,book WHERE userId = ? AND BookBorrowInfo.bookId = book.bookId");
             ps.setInt(1, user.getId());
             resultSet = ps.executeQuery();
 
@@ -393,14 +405,16 @@ public class LibraryDatabase extends Library {
             if (!resultSet.next()) {
                 return null;
             }
-            return new Book(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4), getCalenderFromDateFormatString(resultSet.getString(5)), resultSet.getInt(6));
+            return new Book(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4),
+                    getCalenderFromDateFormatString(resultSet.getString(5)), resultSet.getInt(6));
         } catch (Exception e) {
             System.out.println(e);
         }
         return null;
     }
 
-    public int addNewBookToDatabase(String bookName, String authorName, int noOfPages, Calendar dateOfPublish, int copiesCount) {
+    public int addNewBookToDatabase(String bookName, String authorName, int noOfPages, Calendar dateOfPublish,
+            int copiesCount) {
         int id = -1;
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO Book VALUES(?,?,?,?,?,?)");
@@ -463,7 +477,8 @@ public class LibraryDatabase extends Library {
             ps.setString(5, returnDeadlineDate);
             ps.setNull(6, Types.NULL);
             ps.executeUpdate();
-            ps = connection.prepareStatement("SELECT BookBorrowInfoid FROM BookBorrowInfo WHERE userId = ? AND bookId = ? AND issueCalendarDate = ?");
+            ps = connection.prepareStatement(
+                    "SELECT BookBorrowInfoid FROM BookBorrowInfo WHERE userId = ? AND bookId = ? AND issueCalendarDate = ?");
             ps.setInt(1, userId);
             ps.setInt(2, bookId);
             ps.setString(3, issueCalendarDate);
@@ -486,7 +501,9 @@ public class LibraryDatabase extends Library {
             while (resultSet.next()) {
                 String returnDate = resultSet.getString(6);
                 Calendar calendar = returnDate == null ? null : getCalenderFromDateFormatString(returnDate);
-                bookBorrowInfos.add(new BookBorrowInfo(resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3), getCalenderFromDateFormatString(resultSet.getString(4)), getCalenderFromDateFormatString(resultSet.getString(5)), calendar));
+                bookBorrowInfos.add(new BookBorrowInfo(resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3),
+                        getCalenderFromDateFormatString(resultSet.getString(4)),
+                        getCalenderFromDateFormatString(resultSet.getString(5)), calendar));
             }
         } catch (Exception e) {
             print(e);
@@ -496,7 +513,8 @@ public class LibraryDatabase extends Library {
 
     public int getPriorityLevelFromWaitList(int userId, int bookId) {
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT priority FROM waitList WHERE userId = ? AND bookId = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT priority FROM waitList WHERE userId = ? AND bookId = ?");
             ps.setInt(1, userId);
             ps.setInt(2, bookId);
             resultSet = ps.executeQuery();
@@ -529,7 +547,8 @@ public class LibraryDatabase extends Library {
             return -1;
         }
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) FROM waitList WHERE priority >=? ORDER BY priority DESC");
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT COUNT(*) FROM waitList WHERE priority >=? ORDER BY priority DESC");
             ps.setInt(1, priority);
             resultSet = ps.executeQuery();
             if (resultSet.next()) {
@@ -569,7 +588,8 @@ public class LibraryDatabase extends Library {
 
     public boolean isBookBorrowListcontainsId(int bookBorrowList) {
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM BookBorrowInfo WHERE BookBorrowInfoid = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT * FROM BookBorrowInfo WHERE BookBorrowInfoid = ?");
             ps.setInt(1, bookBorrowList);
             resultSet = ps.executeQuery();
 
@@ -585,7 +605,8 @@ public class LibraryDatabase extends Library {
 
     public boolean isBookBorrowedByUser(int bookId, int userId) {
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM BookBorrowInfo WHERE bookId = ? and userId = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT * FROM BookBorrowInfo WHERE bookId = ? and userId = ?");
             ps.setInt(1, bookId);
             ps.setInt(2, userId);
             resultSet = ps.executeQuery();
@@ -602,14 +623,17 @@ public class LibraryDatabase extends Library {
 
     public BookBorrowInfo getFromBookBorrowListBycontainsId(int bookBorrowList) {
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM BookBorrowInfo WHERE BookBorrowInfoid = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT * FROM BookBorrowInfo WHERE BookBorrowInfoid = ?");
             ps.setInt(1, bookBorrowList);
             resultSet = ps.executeQuery();
 
             if (resultSet.next()) {
                 String returnDate = resultSet.getString(6);
                 Calendar calendar = returnDate == null ? null : getCalenderFromDateFormatString(returnDate);
-                return new BookBorrowInfo(resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3), getCalenderFromDateFormatString(resultSet.getString(4)), getCalenderFromDateFormatString(resultSet.getString(5)), calendar);
+                return new BookBorrowInfo(resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3),
+                        getCalenderFromDateFormatString(resultSet.getString(4)),
+                        getCalenderFromDateFormatString(resultSet.getString(5)), calendar);
             }
 
         } catch (Exception e) {
@@ -631,7 +655,8 @@ public class LibraryDatabase extends Library {
 
     public void IncreaseVipPointsOfUser(int userId) {
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE User SET vipLevel = vipLevel + ? WHERE userId = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("UPDATE User SET vipLevel = vipLevel + ? WHERE userId = ?");
             ps.setInt(1, 5);
             ps.setInt(2, userId);
             ps.executeUpdate();
@@ -642,7 +667,8 @@ public class LibraryDatabase extends Library {
 
     public void decreaseVipPointsOfUser(int userId) {
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE User SET vipLevel = vipLevel - ? WHERE userId = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("UPDATE User SET vipLevel = vipLevel - ? WHERE userId = ?");
             ps.setInt(1, 10);
             ps.setInt(2, userId);
             ps.executeUpdate();
@@ -653,7 +679,8 @@ public class LibraryDatabase extends Library {
 
     public int fetchAndDeleteTheMaxPriorityUserFromWaitList(int bookId) {
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT userId FROM waitList WHERE priority = (SELECT MAX(priority) FROM waitList WHERE bookId = ?)");
+            PreparedStatement ps = connection.prepareStatement(
+                    "SELECT userId FROM waitList WHERE priority = (SELECT MAX(priority) FROM waitList WHERE bookId = ?)");
             ps.setInt(1, bookId);
             resultSet = ps.executeQuery();
             int id = -1;
@@ -687,7 +714,8 @@ public class LibraryDatabase extends Library {
     public Vector<Integer> getAndDeleteWaitListUpdates(int userId) {
         Vector<Integer> list = new Vector<Integer>();
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT BookBorrowInfoid FROM waitListUpdates WHERE userId = ?");
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT BookBorrowInfoid FROM waitListUpdates WHERE userId = ?");
             ps.setInt(1, userId);
             resultSet = ps.executeQuery();
             while (resultSet.next()) {

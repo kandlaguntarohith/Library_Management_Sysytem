@@ -44,8 +44,6 @@ public class UserMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(60, 60, 60));
-        setMaximumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jPanel1.setBackground(new java.awt.Color(60, 60, 60));
 
@@ -76,7 +74,7 @@ public class UserMenu extends javax.swing.JFrame {
             }
         });
 
-        logout.setBackground(new java.awt.Color(125, 112, 152));
+        logout.setBackground(new java.awt.Color(255, 5, 5));
         logout.setForeground(new java.awt.Color(255, 255, 255));
         logout.setText("LOG OUT");
         logout.addActionListener(new java.awt.event.ActionListener() {
